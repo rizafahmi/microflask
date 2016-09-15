@@ -1,6 +1,6 @@
 import sys
 sys.path.append("..")
-from app import app
+import microflask
 
 from unittest import TestCase, main
 
