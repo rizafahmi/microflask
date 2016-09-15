@@ -1,0 +1,23 @@
+# MicroFlask
+
+Microflask is microblog platform for everyone.
+
+## Features
+
+* Simple user auth
+* CRUD blog post
+* Index page shows blog post with pagination
+* Build with Python 3, Flask and MongoDB
+
+## Additional Features
+
+* Elasticsearch for search post
+* Framework CSS Semantic UI
+* Various post type such as link, photo, video, quote, etc.
+* User management and administration
+* Functional testing
+* Acceptance Testing
+
+## Usage
+
+Coming soon
