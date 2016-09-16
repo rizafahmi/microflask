@@ -1,12 +1,15 @@
+import os
 import sys
-sys.path.append("..")
-import microflask
+sys.path.insert(0, os.path.abspath('..'))
+
+print(sys.path)
+from app import app
 
 from unittest import TestCase, main
 
 class BasicTestCase(TestCase):
     def test_index(self):
-        tester = microflask.app.test_client(self)
+        tester = app.test_client(self)
         response = tester.get('/', content_type='html/text')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, b'Halo, Bandung!')
