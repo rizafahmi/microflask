@@ -1,8 +1,8 @@
-from app import app, mongo
+from app import app
 
-from unittest import TestCase, main
+import unittest
 
-class BasicTestCase(TestCase):
+class BasicTestCase(unittest.TestCase):
     def test_index(self):
         tester = app.test_client(self)
         response = tester.get('/', content_type='html/text')
@@ -14,11 +14,11 @@ class BasicTestCase(TestCase):
         response = tester.get('/404', content_type='html/text')
         self.assertEqual(response.status_code, 404)
 
-    def test_database(self):
-        """ Test database connections """
-        with app.app_context():
-            tester = mongo.db.posts.find({})
-            self.assertEqual(str(type(tester)), "<class 'pymongo.cursor.Cursor'>")
+    # def test_database(self):
+    #     """ Test database connections """
+    #     with app.app_context():
+    #         tester = mongo.db.posts.find({})
+    #         self.assertEqual(str(type(tester)), "<class 'pymongo.cursor.Cursor'>")
 
 if __name__ == '__main__':
     main()
