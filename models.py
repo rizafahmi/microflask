@@ -15,6 +15,10 @@ class User(db.Document):
     isAdmin = db.BooleanField(default=False)
     createdAt = db.DateTimeField(default=datetime.datetime.now())
 
+class Status(db.Document):
+    text = db.StringField(default=True)
+    createdAt = db.DateTimeField(default=datetime.datetime.now())
+
 def initialize():
     # if there is no data, insert one
 
