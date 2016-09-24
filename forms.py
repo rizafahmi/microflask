@@ -9,15 +9,15 @@ from wtforms.validators import (
         Length
         )
 
-from model import User, Status
+import models
 
 
 def name_exists(form, field):
-    if User.objects(username=field.data).count() > 0:
+    if models.User.objects(username=field.data).count() > 0:
         return ValidationError('User with that username already exists.')
 
 def email_exists(form, field):
-    if User.objects(email=field.data).count() > 0:
+    if models.User.objects(email=field.data).count() > 0:
         return ValidationError('User with that email already exists.')
 
 class RegisterForm(Form):
