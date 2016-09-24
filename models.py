@@ -1,11 +1,11 @@
 import datetime
 
 from flask_login import UserMixin
-from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
-from app import app
+from flask_bcrypt import Bcrypt
+from app import app, db
 
-db = MongoEngine(app)
-app.session_interface = MongoEngineSessionInterface(db)
+
+flask_bcrypt = Bcrypt(app)
 
 class User(db.Document):
     username = db.StringField(default=True)
@@ -14,3 +14,12 @@ class User(db.Document):
     active = db.BooleanField(default=True)
     isAdmin = db.BooleanField(default=False)
     createdAt = db.DateTimeField(default=datetime.datetime.now())
+
+def initialize():
+    # if there is no data, insert one
+
+    if User.objects.count() < 1:
+        user = User(username='admin', email='email@microflask.com', password=flask_bcrypt.generate_password_hash('admin'), isAdmin=True)
+        user.save()
+    return None
+
