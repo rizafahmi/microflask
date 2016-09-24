@@ -36,4 +36,5 @@ def load_user(userId):
 
 if __name__ == '__main__':
     models.initialize()
+    import ipdb;ipdb.set_trace()
     app.run(debug=DEBUG, host=HOST, port=PORT)
