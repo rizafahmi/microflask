@@ -88,6 +88,7 @@ def login():
 
 @app.route('/')
 def index():
+    flash('hey', 'success')
     return 'Hey'
 
 
