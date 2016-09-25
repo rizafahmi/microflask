@@ -9,7 +9,7 @@ flask_bcrypt = Bcrypt(app)
 
 class User(db.Document, UserMixin):
     username = db.StringField(default=True)
-    email = db.EmailField(unique=True)
+    email = db.StringField(default=True)
     password = db.StringField(default=True)
     is_active = db.BooleanField(default=True)
     is_admin = db.BooleanField(default=False)

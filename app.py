@@ -6,10 +6,9 @@ from flask import (
         flash,
         url_for
         )
-from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
 from flask_login import LoginManager, login_user
 from flask_bcrypt import Bcrypt, check_password_hash
-from mongoengine import DoesNotExist
+from flask_mongoalchemy import MongoAlchemy
 
 import models
 import forms
@@ -21,11 +20,10 @@ MONGODB_NAME = 'microflask'
 
 app = Flask(__name__)
 app.secret_key = 'somerandomsupersecret-strings!'
-app.config['MONGODB_SETTINGS'] = {'DB': MONGODB_NAME}
+app.config['MONGOALCHEMY_DATABASE'] = MONGODB_NAME
 
 # Setting up the DB
-db = MongoEngine(app)
-app.session_interface = MongoEngineSessionInterface(db)
+db = MongoAlchemy(app)
 
 flask_bcrypt = Bcrypt(app)
 
