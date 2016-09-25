@@ -7,7 +7,6 @@ decorator==4.0.10
 Flask==0.11.1
 Flask-Bcrypt==0.7.1
 Flask-Login==0.3.2
-flask-mongoengine==0.8
 Flask-WTF==0.12
 greenlet==0.4.10
 ipdb==0.10.1
@@ -16,7 +15,6 @@ ipython-genutils==0.1.0
 itsdangerous==0.24
 Jinja2==2.8
 MarkupSafe==0.23
-mongoengine==0.10.6
 msgpack-python==0.4.8
 neovim==0.1.10
 pexpect==4.2.1
