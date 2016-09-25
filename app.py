@@ -7,8 +7,9 @@ from flask import (
         url_for
         )
 from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
-from flask_login import LoginManager
-from flask_bcrypt import Bcrypt
+from flask_login import LoginManager, login_user
+from flask_bcrypt import Bcrypt, check_password_hash
+from mongoengine import DoesNotExist
 
 import models
 import forms
@@ -37,10 +38,10 @@ login_manager.login_view = 'login'
 def load_user(userId):
     if userId is None:
         redirect('/login')
-    user = User()
-    user.get_by_id(userId)
+    user = models.User.objects.with_id(userId)
 
-    if user.is_active():
+    import ipdb;ipdb.set_trace()
+    if user.is_active:
         return user
     else:
         return None
@@ -62,8 +63,28 @@ def register():
             user.save()
             return redirect(url_for('index'))
         except:
-            flash("Unable to register.")
+            flash("Unable to register.", "error")
     return render_template('register.html', form=form)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = forms.LoginForm()
+    if form.validate_on_submit():
+
+        try:
+            # import ipdb;ipdb.set_trace()
+            user = models.User.objects.get(email=form.email.data)
+        except DoesNotExist:
+            print("Your email or password doesn't match!")
+        else:
+            if flask_bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user)
+                flash("You've been logged in!")
+                return redirect(url_for('index'))
+            else:
+                flash("Your email or password doesn't match!", "error")
+    return render_template('login.html', form=form)
+
 
 @app.route('/')
 def index():
