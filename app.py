@@ -71,7 +71,7 @@ def login():
 
         try:
             # import ipdb;ipdb.set_trace()
-            user = models.User.objects.get(email=form.email.data)
+            user = models.User.one(email=form.email.data)
         except DoesNotExist:
             print("Your email or password doesn't match!")
         else:
